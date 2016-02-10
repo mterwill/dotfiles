@@ -117,3 +117,13 @@ imap <leader>ww <esc>:w<cr>
 
 " Quick word count
 nmap <leader>wc g<C-g>
+
+" PDF Latex
+nmap <leader>ep :!pdflatex %<cr><cr>
+
+" Change working directory to current file path
+nmap ,cd :cd %:p:h<cr>
+
+" Remap s/S to insert a single character
+nmap s :exec "normal i".nr2char(getchar())."\e"<cr>
+nmap S :exec "normal a".nr2char(getchar())."\e"<cr>
