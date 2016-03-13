@@ -127,3 +127,13 @@ nmap ,cd :cd %:p:h<cr>
 " Remap s/S to insert a single character
 nmap s :exec "normal i".nr2char(getchar())."\e"<cr>
 nmap S :exec "normal a".nr2char(getchar())."\e"<cr>
+
+" Ruby two spaces
+autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+
+" Switch 0 and ^
+nnoremap 0 ^
+nnoremap ^ 0
+
+" Stop vim-markdown from folding
+let g:vim_markdown_folding_disabled = 1
