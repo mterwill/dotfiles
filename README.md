@@ -15,16 +15,6 @@ Instead of OS X's Time Machine, I use a simple rsync script for backups. The
 script (over)writes the latest copy of every file to my external drive. It never
 deletes. Files in ``rsync-exclude`` are not backed up.
 
-## ``config.fish``
-**Location**: ``~/.config/fish/config.fish``
-
-Instead of bash or zsh, I prefer [fish](http://fishshell.com/) for its
-delightful autocompletion.
-
-The shell boasts clean scripting, however the syntax is odd and scripts are not
-as portable.  Thus, except a few simple shortcut functions in my shell, I still
-do most scripting in bash.
-
 ## ``gitignore_global``
 **Location**: ``~/.gitignore_global``
 
