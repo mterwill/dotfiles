@@ -130,6 +130,8 @@ nmap S :exec "normal a".nr2char(getchar())."\e"<cr>
 
 " Ruby two spaces
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+autocmd Filetype json setlocal ts=2 sts=2 sw=2
 
 " Switch 0 and ^
 nnoremap 0 ^
