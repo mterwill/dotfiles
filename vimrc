@@ -34,7 +34,7 @@ nmap <leader>. :bprevious<cr>
 nmap <leader>/ :bnext<cr>
 
 " Automatically delete trailing whitespace on certain filetypes
-autocmd FileType c,cpp,javascript,ruby,php autocmd BufWritePre <buffer> :%s/\s\+$//e
+" autocmd FileType c,cpp,javascript,ruby,php autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 " Map a shortcut to delete trailing whitespace
 nmap <leader>ws :%s/\s\+$//e<cr>
