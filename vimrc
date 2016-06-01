@@ -89,7 +89,7 @@ nmap <leader>e :e ~/.vimrc<cr>
 
 " Persistent undo history
 try
-    set undodir=~/.vim/undodir
+    set undodir=~/.logs/vim-undodir
     set undofile
 catch
 endtry
