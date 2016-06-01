@@ -12,6 +12,11 @@ export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:
 
 eval "$(hub alias -s)"
 
-alias ls="ls -G"
+# Have LS always display colors
+if ls --color -d ~ >/dev/null 2>&1; then
+    alias ls="ls --color=auto" # GNU ls
+elif ls -G -d ~ >/dev/null 2>&1; then
+    alias ls="ls -G" # BSD ls
+fi
 alias tm="tmux at || command tmux"
 alias cdgit='cd $(git rev-parse --show-toplevel)'
