@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Haven't tested this yet. Needs to add linux support too.
+
+install_brew() {
+    [[ $(which brew) == "/usr/local/bin/brew" ]] && return 0
+    echo "[ bootstrap ] installing brew..."
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+}
+
+PACKAGES="vim tmux git wget"
+
+if [ "$(uname -s)" == "Darwin" ]; then
+    install_brew
+
+    echo "[ bootstrap ] updating brew..."
+    brew update
+
+    for package in $PACKAGES; do
+        echo "[ bootstrap ] installing $package..."
+        brew install "$package"
+    done
+fi
+
+echo "[ bootstrap ] cloning dotfiles..."
+git clone https://github.com/mterwill/dotfiles.git "$HOME/.dotfiles"
+[[ $? != 0 ]] && exit 1 # bail if something went wrong
+
+echo "[ bootstrap ] installing dotfiles..."
+$HOME/.dotfiles/install
