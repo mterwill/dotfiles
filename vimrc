@@ -122,7 +122,7 @@ nmap <leader>wc g<C-g>
 nmap <leader>ep :!pdflatex %<cr><cr>
 
 " Change working directory to current file path
-nmap ,cd :cd %:p:h<cr>
+nmap <leader>cd :cd %:p:h<cr>
 
 " Remap s/S to insert a single character
 nmap s :exec "normal i".nr2char(getchar())."\e"<cr>
@@ -139,3 +139,6 @@ nnoremap ^ 0
 
 " Stop vim-markdown from folding
 let g:vim_markdown_folding_disabled = 1
+
+" Map Nerdtree
+map <leader>nn :NERDTreeToggle<CR>
