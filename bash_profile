@@ -1,3 +1,4 @@
-for f in ".bashrc .bashrc.this .rvm/scripts/rvm .profile"; do
-    [[ -s "$HOME/$f" ]] && source "$HOME/$f"
+SOURCE_FILES=".bashrc .rvm/scripts/rvm .bashrc.this "
+for f in $SOURCE_FILES; do
+    [[ -e "$HOME/$f" ]] && . "$HOME/$f"
 done

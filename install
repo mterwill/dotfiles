@@ -3,14 +3,23 @@
 # Very convoluted but best way I can find to get the full path for the symlink
 pushd $(pwd)/$(dirname $0) > /dev/null && SRC=$(pwd) && popd > /dev/null
 
-DEST=$HOME       # directory we're targeting
+DEST=$HOME # directory we're targeting
 
-pushd "$SRC"       # work in the directory the script is in
+pushd "$SRC" > /dev/null # work in the directory the script is in
 
 set -x
 
 # Pull everything from .gitmodules
 git submodule update --init --recursive
+
+# Git submodules are super stupid and store the configs in two places, so
+# if the .gitmodules is updated it won't pull those changes in.
+git config -f .gitmodules --get-regexp '^submodule\..*\.path$' |
+while read path_key path; do
+    url_key=$(echo $path_key | sed 's/\.path/.url/')
+    url=$(git config -f .gitmodules --get "$url_key")
+    git submodule add $url $path
+done
 
 # All of the simple thing that need a simple link
 LINK="tmux.conf vimrc bashrc bash_profile gitignore_global"
@@ -31,9 +40,9 @@ if [[ ! -e "$HOME/.gitconfig" ]]; then
 fi
 
 # set up folder for our persistent bash/vim logs
-mkdir -p "$HOME/.logs/vim-undodir $HOME/.logs/bash-history"
-chmod 700 "$_"
+mkdir -p "$HOME/.logs/vim-undodir" "$HOME/.logs/bash-history"
+chmod 700 "$HOME/.logs"
 
 set +x
 
-popd
+popd > /dev/null
