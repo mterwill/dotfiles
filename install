@@ -31,7 +31,7 @@ if [[ ! -e "$HOME/.gitconfig" ]]; then
 fi
 
 # set up folder for our persistent bash/vim logs
-mkdir -p "$HOME/.logs"
+mkdir -p "$HOME/.logs/vim-undodir $HOME/.logs/bash-history"
 chmod 700 "$_"
 
 set +x
