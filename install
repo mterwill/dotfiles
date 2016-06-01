@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Very convoluted but best way I can find to get the full path for the symlink
+pushd $(pwd)/$(dirname $0) > /dev/null && SRC=$(pwd) && popd > /dev/null
+
+DEST=$HOME       # directory we're targeting
+
+pushd "$SRC"       # work in the directory the script is in
+
+set -x
+
+# Pull everything from .gitmodules
+git submodule update --init --recursive
+
+# All of the simple thing that need a simple link
+LINK="tmux.conf vimrc bashrc bash_profile gitignore_global"
+for f in $LINK; do
+    [[ $* == *--overwrite* ]] && rm "$DEST/.$f"
+    ln -s "$SRC/$f" "$DEST/.$f"
+done
+
+# Just copy the vim folder, no need to link
+[[ $* == *--overwrite* ]] && rm -rf "$DEST/.vim"
+cp -r "$SRC/vim" "$DEST/.vim"
+
+# Set up git
+if [[ ! -e "$HOME/.gitconfig" ]]; then
+    git config --global core.excludesfile "$SRC/.gitignore_global"
+    git config --global user.name "Matthew Terwilliger"
+    git config --global user.email "matt@terwilligers.com"
+fi
+
+# set up folder for our persistent bash/vim logs
+mkdir -p "$HOME/.logs"
+chmod 700 "$_"
+
+set +x
+
+popd
