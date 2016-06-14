@@ -5,5 +5,6 @@ alias cdgit='cd $(git rev-parse --show-toplevel)'
 alias gg="git add . && git commit"
 alias l="ls -l"
 alias vi="vim"
+alias f="find . -name"
 
-export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'
+export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(history 1 | cut -c8-)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'
