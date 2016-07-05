@@ -142,3 +142,8 @@ let g:vim_markdown_folding_disabled = 1
 
 " Map Nerdtree
 map <leader>nn :NERDTreeToggle<CR>
+
+" Use ag when available
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
