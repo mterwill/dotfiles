@@ -63,4 +63,6 @@ echo "[ logs ] creating and setting permissions on log directories"
 mkdir -p "$HOME/.logs/vim-undodir" "$HOME/.logs/bash-history"
 chmod 700 "$HOME/.logs"
 
+touch "$HOME/.profile"
+
 popd > /dev/null

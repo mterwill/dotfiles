@@ -18,8 +18,6 @@ autoload -Uz promptinit
 promptinit
 prompt redhat
 
-source ~/.bashrc.this
-
 export EDITOR=vim
 
 export TERM="screen-256color"
@@ -37,3 +35,5 @@ function mkcd {
   dir="$*";
   mkdir -p "$dir" && cd "$dir";
 }
+
+source ~/.profile
