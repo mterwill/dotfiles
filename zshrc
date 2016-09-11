@@ -21,3 +21,19 @@ prompt redhat
 source ~/.bashrc.this
 
 export EDITOR=vim
+
+export TERM="screen-256color"
+
+alias tm="tmux at || command tmux"
+alias cdgit='cd $(git rev-parse --show-toplevel)'
+alias gg="git add . && git commit"
+alias l="ls -l"
+alias vi="vim"
+alias f="find . -name"
+alias mkcd="mkcd"
+alias gs="git status"
+
+function mkcd {
+  dir="$*";
+  mkdir -p "$dir" && cd "$dir";
+}
