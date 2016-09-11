@@ -20,7 +20,7 @@ git submodule update --init --recursive > /dev/null
 echo "[ gitmodules ] updated"
 
 # All of the simple thing that need a simple link
-LINK="tmux.conf vimrc bashrc bash_profile gitignore_global"
+LINK="tmux.conf vimrc bashrc bash_profile gitignore_global zshrc"
 for f in $LINK; do
     if [ -e "$HOME/.$f" ]; then
         if [[ $* == *--overwrite* ]]; then
@@ -29,8 +29,10 @@ for f in $LINK; do
         else
             echo "[ dotfiles ] $f exists – skipping"
         fi
+    else
+        echo "[ dotfiles ] $f does not exist – linking"
+        ln -s "$SRC/$f" "$HOME/.$f"
     fi
-
 done
 
 # Just copy the vim folder, no need to link
