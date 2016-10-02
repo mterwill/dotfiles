@@ -26,7 +26,7 @@ if empty(glob("~/.vim/solarized"))
 endif
 
 " Set up solarized colorscheme
-set background=dark
+let &background = $VIMBG
 colorscheme solarized
 
 " Move around buffers
@@ -147,3 +147,5 @@ map <leader>nn :NERDTreeToggle<CR>
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
+
+let g:syntastic_javascript_checkers = ['eslint']
