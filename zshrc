@@ -39,3 +39,4 @@ function mkcd {
 source ~/.profile
 
 bindkey "^[[3~" delete-char
+export PATH="/usr/local/sbin:$PATH"
