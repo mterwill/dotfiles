@@ -42,3 +42,14 @@ bindkey "^[[3~" delete-char
 export PATH="/usr/local/sbin:$PATH"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+function journal {
+    file="$HOME/Dropbox/journals/$(date +'%Y-%m-%d').md"
+
+    # templating
+    [[ -s "$file" ]] || echo "# $(date +'%A %B %e, %Y')\n\n" > $file
+
+    vim $file
+}
+
+alias j=journal
