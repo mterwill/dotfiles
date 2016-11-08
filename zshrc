@@ -30,6 +30,8 @@ alias vi="vim"
 alias f="find . -name"
 alias mkcd="mkcd"
 alias gs="git status"
+alias gd="git diff"
+alias gdh="git diff HEAD"
 
 function mkcd {
   dir="$*";
