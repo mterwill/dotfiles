@@ -55,3 +55,5 @@ function journal {
 }
 
 alias j=journal
+
+alias eecshelp="tmuxinator eecshelp"

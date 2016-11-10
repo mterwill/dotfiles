@@ -20,7 +20,7 @@ git submodule update --init --recursive > /dev/null
 echo "[ gitmodules ] updated"
 
 # All of the simple thing that need a simple link
-LINK="tmux.conf zshrc vimrc gitignore_global"
+LINK="tmux.conf zshrc vimrc gitignore_global tmuxinator"
 for f in $LINK; do
     if [ -e "$HOME/.$f" ]; then
         if [[ $* == *--overwrite* ]]; then

@@ -1,0 +1,12 @@
+# ~/.tmuxinator/eecshelp.yml
+
+name: eh
+root: /Users/mterwilliger/Documents/repos/classroom-help-queue
+
+windows:
+  - l33t:
+      layout: 667d,364x80,0,0{182x80,0,0,0,181x80,183,0[181x40,183,0,1,181x39,183,41,2]}
+      panes:
+        - clear
+        - docker-compose run web rails c
+        - docker-compose up
