@@ -149,3 +149,13 @@ if executable('ag')
 endif
 
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_cpp_compiler_options = ' -std=c++11'
+
+" Remap Y to be consistent with D, C, etc
+nmap Y y$
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
