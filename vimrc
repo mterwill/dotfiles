@@ -1,5 +1,29 @@
-" Load plugins via Pathogen
-execute pathogen#infect()
+set nocompatible
+filetype off
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'junegunn/goyo.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-sensible'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'tpope/vim-surround'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'junegunn/vim-easy-align'
+
+call vundle#end()
+filetype plugin indent on
 
 " Set leader to comma
 let mapleader=","
@@ -27,7 +51,7 @@ endif
 
 " Set up solarized colorscheme
 let &background = $VIMBG
-colorscheme solarized
+silent! colorscheme solarized
 
 " Move around buffers
 nmap <leader>. :bprevious<cr>

@@ -5,20 +5,6 @@ pushd $(pwd)/$(dirname $0) > /dev/null && SRC=$(pwd) && popd > /dev/null
 
 pushd "$SRC" > /dev/null # work in the directory the script is in
 
-# Git submodules are super stupid and store the configs in two places, so
-# if the .gitmodules is updated it won't pull those changes in.
-git config -f .gitmodules --get-regexp '^submodule\..*\.path$' |
-while read path_key path; do
-    url_key=$(echo $path_key | sed 's/\.path/.url/')
-    url=$(git config -f .gitmodules --get "$url_key")
-    git submodule add $url $path &>/dev/null # squelch "already exists in the index" messages 
-done
-
-# Pull everything from .gitmodules
-git submodule update --init --recursive > /dev/null
-
-echo "[ gitmodules ] updated"
-
 # All of the simple thing that need a simple link
 LINK="tmux.conf zshrc vimrc gitignore_global tmuxinator"
 for f in $LINK; do
@@ -35,17 +21,13 @@ for f in $LINK; do
     fi
 done
 
-# Just copy the vim folder, no need to link
-if [ -d "$HOME/.vim" ]; then
-    if [[ $* == *--overwrite* ]]; then
-        echo "[ dotfiles ] .vim exists – removing and copying"
-        rm -rf "$HOME/.vim" && cp -r "$SRC/vim" "$HOME/.vim"
-    else
-        echo "[ dotfiles ] .vim exists – skipping"
-    fi
-else
-    cp -r "$SRC/vim" "$HOME/.vim"
-fi
+# Install vundle
+mkdir -p "$HOME/.vim/bundle"
+rm -Rf "$HOME/.vim/bundle/"
+git clone -q "https://github.com/VundleVim/Vundle.vim.git" "$HOME/.vim/bundle/Vundle.vim"
+
+# Install vim plugins
+vim +PluginInstall +qall
 
 # Set up git
 if [[ ! -e "$HOME/.gitconfig" ]]; then
@@ -61,7 +43,7 @@ fi
 
 # set up folder for our persistent bash/vim logs
 echo "[ logs ] creating and setting permissions on log directories"
-mkdir -p "$HOME/.logs/vim-undodir" "$HOME/.logs/bash-history"
+mkdir -p "$HOME/.logs/vim-undodir"
 chmod 700 "$HOME/.logs"
 
 touch "$HOME/.profile"
