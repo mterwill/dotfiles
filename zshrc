@@ -57,3 +57,13 @@ function journal {
 alias j=journal
 
 alias eecshelp="tmuxinator eecshelp"
+
+setopt AUTO_PUSHD
+
+alias help="man zshbuiltins"
+
+alias gs="git status"
+alias gl="git log"
+alias gd="git diff"
+
+alias shasum="shasum -a 256"
