@@ -161,8 +161,9 @@ autocmd Filetype json setlocal ts=2 sts=2 sw=2
 nnoremap 0 ^
 nnoremap ^ 0
 
-" Stop vim-markdown from folding
+" Stop vim-markdown and vim-beancount from folding
 let g:vim_markdown_folding_disabled = 1
+let g:vim_beancount_folding_disabled = 1
 
 " Map Nerdtree
 map <leader>nn :NERDTreeToggle<CR>
@@ -183,3 +184,5 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+set nofoldenable
