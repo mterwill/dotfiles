@@ -21,6 +21,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'junegunn/vim-easy-align'
+Plugin 'nathangrigg/vim-beancount'
 
 call vundle#end()
 filetype plugin indent on
