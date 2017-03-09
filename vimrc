@@ -159,6 +159,7 @@ nmap S :exec "normal a".nr2char(getchar())."\e"<cr>
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 autocmd Filetype json setlocal ts=2 sts=2 sw=2
+autocmd Filetype beancount setlocal ts=2 sts=2 sw=2
 
 " Switch 0 and ^
 nnoremap 0 ^
@@ -208,3 +209,7 @@ nmap <leader>cc :Cdgit<Enter>
 command Gitbrowse !gb %
 
 nmap <leader>bb :Gitbrowse<Enter>
+
+set nofoldenable
+
+let g:syntastic_beancount_checkers = ['bean_check']
