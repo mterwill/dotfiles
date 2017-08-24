@@ -10,3 +10,6 @@ Thumbs.db
 *.swp
 *.swo
 *~
+__pycache__/
+*.pyc
+junit.xml
