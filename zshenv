@@ -2,7 +2,7 @@ alias l="ls -l"
 alias vi="vim"
 alias f="find . -name"
 alias shasum="shasum -a 256"
-alias cdgit="cd $(git rev-parse --show-toplevel)"
+alias cdgit='cd $(git rev-parse --show-toplevel)' # single so it's not interpolated
 alias help="man zshbuiltins"
 
 # begin git aliases
