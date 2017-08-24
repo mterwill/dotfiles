@@ -22,6 +22,8 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'nathangrigg/vim-beancount'
+Plugin 'tpope/vim-speeddating'
+Plugin 'StanAngeloff/php.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -186,4 +188,23 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-set nofoldenable
+function! PhpSyntaxOverride()
+  hi! def link phpDocTags  phpDefine
+  hi! def link phpDocParam phpType
+endfunction
+
+augroup phpSyntaxOverride
+  autocmd!
+  autocmd FileType php call PhpSyntaxOverride()
+augroup END
+
+:map Q <Nop>
+
+nmap <leader>bb !cdgit && gb %
+
+command Cdgit :cd `git rev-parse --show-toplevel`
+nmap <leader>cc :Cdgit<Enter>
+
+command Gitbrowse !gb %
+
+nmap <leader>bb :Gitbrowse<Enter>
