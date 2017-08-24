@@ -46,14 +46,19 @@ fi
 echo "[ logs ] creating and setting permissions on log directories"
 mkdir -p "$HOME/.logs/vim-undodir"
 
-echo "[ zsh ] installing sqlite3 hook"
-git clone -q "https://github.com/larkery/zsh-histdb.git"
+if grep "sqlite-history" "$HOME/.profile" > /dev/null; then
+    echo "[ zsh ] sqlite3 already installed"
+else
+    echo "[ zsh ] installing sqlite3 hook"
 
-echo "source $SRC/sqlite-history.zsh" >> "$HOME/.profile"
-echo "source $SRC/history-timer.zsh" >> "$HOME/.profile"
-echo "autoload -Uz add-zsh-hook" >> "$HOME/.profile"
-echo "add-zsh-hook preexec _start_timer" >> "$HOME/.profile"
-echo "add-zsh-hook precmd  _stop_timer" >> "$HOME/.profile"
-chmod 700 "$HOME/.histdb"
+    git clone -q "https://github.com/larkery/zsh-histdb.git"
+
+    echo ". $SRC/zsh-histdb/sqlite-history.zsh" >> "$HOME/.profile"
+    echo ". $SRC/zsh-histdb/history-timer.zsh" >> "$HOME/.profile"
+    echo "autoload -Uz add-zsh-hook" >> "$HOME/.profile"
+    echo "add-zsh-hook preexec _start_timer" >> "$HOME/.profile"
+    echo "add-zsh-hook precmd  _stop_timer" >> "$HOME/.profile"
+    chmod 700 "$HOME/.histdb"
+fi
 
 popd > /dev/null
