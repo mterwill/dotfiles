@@ -31,6 +31,7 @@ mkcd () {
 
 # begin PATH manipulation
 export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/bin:$PATH"
 # end PATH manipulation
 
 # for machine specific configuration
