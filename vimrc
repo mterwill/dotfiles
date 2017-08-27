@@ -24,6 +24,7 @@ Plugin 'junegunn/vim-easy-align'
 Plugin 'nathangrigg/vim-beancount'
 Plugin 'tpope/vim-speeddating'
 Plugin 'StanAngeloff/php.vim'
+Plugin 'mileszs/ack.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -177,7 +178,6 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
-let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
 
 " Remap Y to be consistent with D, C, etc
@@ -213,3 +213,15 @@ nmap <leader>bb :Gitbrowse<Enter>
 set nofoldenable
 
 let g:syntastic_beancount_checkers = ['bean_check']
+let g:syntastic_go_checkers = ['go']
+let g:syntastic_javascript_checkers = ['eslint']
+
+imap <leader>aa <C-x><C-o>
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+if !empty($LIGHT_COLORS)
+    set bg=light
+endif
