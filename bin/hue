@@ -42,6 +42,10 @@ def lights():
     print()
 
 def gid_for_abbr(group_abbr):
+    if group_abbr == 'all':
+        # special gid for all lights
+        return 0
+
     groups = requests.get(build_url('/groups')).json()
     id_to_name = { int(k): i['name'].lower() for k, i in groups.items() }
 
@@ -74,7 +78,7 @@ def change_state(group_abbr, state):
             raise RuntimeError(response)
 
 @click.command()
-@click.argument('group_abbr')
+@click.argument('group_abbr', default='all')
 @click.argument('brightness', default=100)
 def on(group_abbr, brightness):
     change_state(group_abbr, {
@@ -83,7 +87,7 @@ def on(group_abbr, brightness):
     })
 
 @click.command()
-@click.argument('group_abbr', default = '')
+@click.argument('group_abbr', default = 'all')
 def off(group_abbr):
     change_state(group_abbr, {
         'on': False,
