@@ -1,0 +1,107 @@
+#!/usr/bin/env python3
+
+import click
+import requests
+import os
+import json
+
+IP       = 'HUE_IP'
+USERNAME = 'HUE_USERNAME'
+
+def build_url(req_uri):
+    return '/'.join([
+        'http:/',
+        os.environ[IP],
+        'api',
+        os.environ[USERNAME],
+        req_uri.strip('/'),
+    ])
+
+@click.command()
+def lights():
+    groups = requests.get(build_url('/groups')).json()
+    lights = requests.get(build_url('/lights')).json()
+
+    for gid, ginfo in groups.items():
+        print()
+        print('[ {} ]'.format(ginfo['name']))
+
+        for lid in ginfo['lights']:
+            if lights[lid]['state']['on']:
+                state = 'at {}%'.format(
+                    brightness_to_percent(lights[lid]['state']['bri'])
+                )
+            else:
+                state = 'off'
+
+            print('=>💡 {} is {}'.format(
+                lights[lid]['name'],
+                state
+            ))
+
+    print()
+
+def gid_for_abbr(group_abbr):
+    groups = requests.get(build_url('/groups')).json()
+    id_to_name = { int(k): i['name'].lower() for k, i in groups.items() }
+
+    # take the first gid to match every character in abbr
+    for gid, gname in id_to_name.items():
+        for char in group_abbr.lower():
+            if char not in gname:
+                break
+        else:
+            return gid
+
+    raise KeyError('Could not find match for {}'.format(group_abbr))
+
+def brightness_to_percent(brightness):
+    return int(100 * brightness / 254)
+
+def percent_to_brightness(percent):
+    return int(254 * percent / 100)
+
+def change_state(group_abbr, state):
+    group_id = gid_for_abbr(group_abbr)
+
+    response = requests.put(
+        build_url('/groups/{}/action'.format(group_id)),
+        data=json.dumps(state)
+    ).json()
+
+    for item in response:
+        if 'error' in item:
+            raise RuntimeError(response)
+
+@click.command()
+@click.argument('group_abbr')
+@click.argument('brightness', default=100)
+def on(group_abbr, brightness):
+    change_state(group_abbr, {
+        'on': True,
+        'bri': percent_to_brightness(brightness)
+    })
+
+@click.command()
+@click.argument('group_abbr', default = '')
+def off(group_abbr):
+    change_state(group_abbr, {
+        'on': False,
+    })
+
+@click.group()
+def cli():
+    pass
+
+if __name__ == '__main__':
+    if IP not in os.environ:
+        print('You need to export HUE_IP')
+        exit(1)
+    if USERNAME not in os.environ:
+        print('You need to export HUE_USERNAME')
+        exit(1)
+
+    cli.add_command(lights)
+    cli.add_command(on)
+    cli.add_command(off)
+    cli()
