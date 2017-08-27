@@ -60,6 +60,7 @@ else
     echo "autoload -Uz add-zsh-hook" >> "$HOME/.profile"
     echo "add-zsh-hook preexec _start_timer" >> "$HOME/.profile"
     echo "add-zsh-hook precmd  _stop_timer" >> "$HOME/.profile"
+    mkdir "$HOME/.histdb"
     chmod 700 "$HOME/.histdb"
 fi
 
