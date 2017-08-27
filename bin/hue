@@ -50,6 +50,7 @@ def gid_for_abbr(group_abbr):
     id_to_name = { int(k): i['name'].lower() for k, i in groups.items() }
 
     # take the first gid to match every character in abbr
+    # TODO: this will match anagram substrings too
     for gid, gname in id_to_name.items():
         for char in group_abbr.lower():
             if char not in gname:
@@ -63,7 +64,7 @@ def brightness_to_percent(brightness):
     return int(100 * brightness / 254)
 
 def percent_to_brightness(percent):
-    return int(254 * percent / 100)
+    return min(254, int(254 * percent / 100))
 
 def change_state(group_abbr, state):
     group_id = gid_for_abbr(group_abbr)
