@@ -1,0 +1,9 @@
+#!/usr/bin/env python3
+
+import sys
+
+
+if '-s' in sys.argv or '--split' in sys.argv:
+    print([ line.strip() for line in sys.stdin.read().split() ])
+else:
+    print([ line.strip() for line in sys.stdin.readlines() ])
