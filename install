@@ -38,6 +38,8 @@ if [[ ! -e "$HOME/.gitconfig" ]]; then
     git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
     git config --global pull.rebase true
     git config --global help.autocorrect 5
+    git config --global rebase.autostash true
+    # git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 else
     echo "[ gitconfig ] gitconfig exists – skipping"
 fi
