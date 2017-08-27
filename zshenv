@@ -7,11 +7,9 @@ alias help="man zshbuiltins"
 
 # begin git aliases
 alias gs="git status"
-alias gd="git diff"
-alias gdh="git diff HEAD"
-alias gs="git status"
 alias gl="git log"
 alias gd="git diff"
+alias gdh="git diff HEAD"
 alias git-rm-merged="git branch --merged | egrep -v \"(^\*|master)\" | xargs git branch -d"
 # end git aliases
 
