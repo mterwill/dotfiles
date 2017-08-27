@@ -21,3 +21,7 @@ export TERM="screen-256color"
 bindkey "^[[3~" delete-char
 
 setopt AUTO_PUSHD
+
+if [[ $ITERM_PROFILE == "Light" ]]; then
+    export LIGHT_COLORS=1
+fi
