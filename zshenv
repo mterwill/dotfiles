@@ -4,6 +4,9 @@ alias f="find . -name"
 alias shasum="shasum -a 256"
 alias cdgit='git rev-parse --show-toplevel 2>&1 >/dev/null && cd $(git rev-parse --show-toplevel)' # single so it's not interpolated
 alias help="man zshbuiltins"
+alias genpub="ssh-keygen -y -f"
+alias grep="grep -v grep | grep"
+alias md5sum="md5"
 
 # begin git aliases
 alias gs="git status"
