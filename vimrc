@@ -3,12 +3,13 @@ filetype off
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=/usr/local/opt/fzf
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'junegunn/goyo.vim'
-Plugin 'scrooloose/syntastic'
+Plugin 'w0rp/ale'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'altercation/vim-colors-solarized'
@@ -16,15 +17,12 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-sensible'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'tpope/vim-surround'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
+Plugin 'junegunn/fzf.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'nathangrigg/vim-beancount'
-Plugin 'tpope/vim-speeddating'
 Plugin 'StanAngeloff/php.vim'
-Plugin 'mileszs/ack.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -143,24 +141,15 @@ map <leader>pp "*p
 nmap <leader>w :w<cr>
 imap <leader>ww <esc>:w<cr>
 
-" Quick word count
-nmap <leader>wc g<C-g>
-
-" PDF Latex
-nmap <leader>ep :!pdflatex %<cr><cr>
-
 " Change working directory to current file path
 nmap <leader>cd :cd %:p:h<cr>
-
-" Remap s/S to insert a single character
-nmap s :exec "normal i".nr2char(getchar())."\e"<cr>
-nmap S :exec "normal a".nr2char(getchar())."\e"<cr>
 
 " Ruby two spaces
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 autocmd Filetype json setlocal ts=2 sts=2 sw=2
 autocmd Filetype beancount setlocal ts=2 sts=2 sw=2
+autocmd Filetype yaml setlocal ts=2 sts=2 sw=2
 
 " Switch 0 and ^
 nnoremap 0 ^
@@ -169,16 +158,6 @@ nnoremap ^ 0
 " Stop vim-markdown and vim-beancount from folding
 let g:vim_markdown_folding_disabled = 1
 let g:vim_beancount_folding_disabled = 1
-
-" Map Nerdtree
-map <leader>nn :NERDTreeToggle<CR>
-
-" Use ag when available
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
-
-let g:syntastic_cpp_compiler_options = ' -std=c++11'
 
 " Remap Y to be consistent with D, C, etc
 nmap Y y$
@@ -199,9 +178,8 @@ augroup phpSyntaxOverride
   autocmd FileType php call PhpSyntaxOverride()
 augroup END
 
-:map Q <Nop>
-
-nmap <leader>bb !cdgit && gb %
+" Q normally drops you into Ex mode. Nobody wants that. 
+map Q <Nop>
 
 command Cdgit :cd `git rev-parse --show-toplevel`
 nmap <leader>cc :Cdgit<Enter>
@@ -212,16 +190,10 @@ nmap <leader>bb :Gitbrowse<Enter>
 
 set nofoldenable
 
-let g:syntastic_beancount_checkers = ['bean_check']
-let g:syntastic_go_checkers = ['go']
-let g:syntastic_javascript_checkers = ['eslint']
-
 imap <leader>aa <C-x><C-o>
-
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
 
 if !empty($LIGHT_COLORS)
     set bg=light
 endif
+
+nmap <c-p> :GFiles<cr>
