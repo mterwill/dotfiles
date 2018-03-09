@@ -23,6 +23,7 @@ Plugin 'mxw/vim-jsx'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'nathangrigg/vim-beancount'
 Plugin 'StanAngeloff/php.vim'
+Plugin 'tpope/vim-rhubarb'
 
 call vundle#end()
 filetype plugin indent on
@@ -182,18 +183,16 @@ augroup END
 map Q <Nop>
 
 command Cdgit :cd `git rev-parse --show-toplevel`
-nmap <leader>cc :Cdgit<Enter>
-
-command Gitbrowse !gb %
-
-nmap <leader>bb :Gitbrowse<Enter>
 
 set nofoldenable
 
-imap <leader>aa <C-x><C-o>
-
+" allow setting a light background via env variable
 if !empty($LIGHT_COLORS)
     set bg=light
 endif
 
+" Used to use Ctrl-P but switched to fzf for better days
 nmap <c-p> :GFiles<cr>
+
+" for tpope/vim-rhubarb
+let g:github_enterprise_urls = ['https://git.rsglab.com']

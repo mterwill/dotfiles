@@ -16,15 +16,6 @@ alias gdh="git diff HEAD"
 alias git-rm-merged="git branch --merged | egrep -v \"(^\*|master)\" | xargs git branch -d"
 # end git aliases
 
-# for quick vim browsing of a file
-gb () {
-    URI="$(git browse -u)" # requires hub
-
-    [[ "$URI" == *"tree"* ]] || URI="$(git browse -u)/tree/master"
-
-    open "$URI/$@"
-}
-
 mkcd () {
   dir="$*";
   mkdir -p "$dir" && cd "$dir";
