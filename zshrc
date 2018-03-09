@@ -31,3 +31,6 @@ setopt AUTO_PUSHD
 if [[ $ITERM_PROFILE == "Light" ]]; then
     export LIGHT_COLORS=1
 fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="/usr/local/opt/qt/bin:$PATH"
