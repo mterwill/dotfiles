@@ -26,7 +26,6 @@ Plugin 'StanAngeloff/php.vim'
 Plugin 'tpope/vim-rhubarb'
 
 call vundle#end()
-filetype plugin indent on
 
 " Set leader to comma
 let mapleader=","
@@ -59,9 +58,6 @@ silent! colorscheme solarized
 " Move around buffers
 nmap <leader>. :bprevious<cr>
 nmap <leader>/ :bnext<cr>
-
-" Automatically delete trailing whitespace on certain filetypes
-" autocmd FileType c,cpp,javascript,ruby,php autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 " Map a shortcut to delete trailing whitespace
 nmap <leader>ws :%s/\s\+$//e<cr>
@@ -105,9 +101,6 @@ autocmd BufReadPost *
      \   exe "normal! g`\"" |
      \ endif
 
-" Remember info about open buffers on close
-set viminfo^=%
-
 " Pressing ,ss will toggle and untoggle spell checking
 nmap <leader>ss :setlocal spell!<cr>
 
@@ -127,9 +120,6 @@ nmap <silent> <leader>zz :Goyo<cr>
 " Disable obnoxious error bells
 set noerrorbells visualbell t_vb=
 
-" Tab auto-insert
-nmap <Tab> i<Tab>
-
 " Copy/paste to system clipboard
 nmap <leader>yy "*yy
 vmap <leader>yy "*y
@@ -145,7 +135,7 @@ imap <leader>ww <esc>:w<cr>
 " Change working directory to current file path
 nmap <leader>cd :cd %:p:h<cr>
 
-" Ruby two spaces
+" Configure certain filetypes to indent two spaces instead of 4
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 autocmd Filetype json setlocal ts=2 sts=2 sw=2
@@ -169,22 +159,18 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+" Highlight php @params, etc. inside docblocks
 function! PhpSyntaxOverride()
   hi! def link phpDocTags  phpDefine
   hi! def link phpDocParam phpType
 endfunction
-
 augroup phpSyntaxOverride
   autocmd!
   autocmd FileType php call PhpSyntaxOverride()
 augroup END
 
-" Q normally drops you into Ex mode. Nobody wants that. 
+" Q normally drops you into Ex mode. Nobody wants that.
 map Q <Nop>
-
-command Cdgit :cd `git rev-parse --show-toplevel`
-
-set nofoldenable
 
 " allow setting a light background via env variable
 if !empty($LIGHT_COLORS)
@@ -196,3 +182,7 @@ nmap <c-p> :GFiles<cr>
 
 " for tpope/vim-rhubarb
 let g:github_enterprise_urls = ['https://git.rsglab.com']
+
+" For speed on large files, don't lint on text change or on fopen
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
