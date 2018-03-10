@@ -7,6 +7,7 @@ alias help="man zshbuiltins"
 alias genpub="ssh-keygen -y -f"
 alias grep="grep -v grep | grep"
 alias md5sum="md5"
+alias k="kubectl"
 
 # begin git aliases
 alias gs="git status"
