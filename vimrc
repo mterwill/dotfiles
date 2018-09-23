@@ -24,6 +24,9 @@ Plugin 'junegunn/vim-easy-align'
 Plugin 'nathangrigg/vim-beancount'
 Plugin 'StanAngeloff/php.vim'
 Plugin 'tpope/vim-rhubarb'
+Plugin 'rodjek/vim-puppet'
+Plugin 'rizzatti/dash.vim'
+Plugin 'fatih/vim-go'
 
 call vundle#end()
 
@@ -186,3 +189,4 @@ let g:github_enterprise_urls = ['https://git.rsglab.com']
 " For speed on large files, don't lint on text change or on fopen
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
+let g:ale_php_phpcs_standard='/Volumes/cAseSensitive/mailchimp/vendor/rsg/mc-codesniffer-ruleset/MCStandard --exclude=Generic.Files.LineLength,Squiz.WhiteSpace.SuperfluousWhitespace -d memory_limit=-1'
