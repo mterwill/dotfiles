@@ -14,6 +14,8 @@ SAVEHIST=10000000
 setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 setopt HIST_SAVE_NO_DUPS
+setopt AUTO_PUSHD
+setopt AUTO_CD
 
 bindkey -e
 # End of lines configured by zsh-newuser-install
@@ -25,8 +27,6 @@ export EDITOR=vim
 export TERM="screen-256color"
 
 bindkey "^[[3~" delete-char
-
-setopt AUTO_PUSHD
 
 if [[ $ITERM_PROFILE == "Light" ]]; then
     export LIGHT_COLORS=1
