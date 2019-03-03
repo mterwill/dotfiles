@@ -16,3 +16,4 @@ _site/
 __pycache__/
 venv/
 tags
+.ruby-version
