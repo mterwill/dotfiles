@@ -176,11 +176,7 @@ endif
 " Used to use Ctrl-P but switched to fzf for better days
 nmap <c-p> :GFiles<cr>
 
-" for tpope/vim-rhubarb
-let g:github_enterprise_urls = ['https://git.rsglab.com']
-
 " For speed on large files, don't lint on text change or on fopen
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
-let g:ale_php_phpcs_standard='/Volumes/cAseSensitive/mailchimp/vendor/rsg/mc-codesniffer-ruleset/MCStandard --exclude=Generic.Files.LineLength,Squiz.WhiteSpace.SuperfluousWhitespace -d memory_limit=-1'
 let g:ale_linters = {'javascript': ['eslint']}
