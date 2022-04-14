@@ -6,7 +6,7 @@ pushd $(pwd)/$(dirname $0) > /dev/null && SRC=$(pwd) && popd > /dev/null
 pushd "$SRC" > /dev/null # work in the directory the script is in
 
 # All of the simple thing that need a simple link
-LINK="tmux.conf zshrc zshenv vimrc gitignore_global tmuxinator"
+LINK="tmux.conf zshrc zshenv vimrc gitignore_global"
 for f in $LINK; do
     if [ -e "$HOME/.$f" ]; then
         if [[ $* == *--overwrite* ]]; then
@@ -42,26 +42,6 @@ if [[ ! -e "$HOME/.gitconfig" ]]; then
     # git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 else
     echo "[ gitconfig ] gitconfig exists – skipping"
-fi
-
-# set up folder for our persistent vim logs
-echo "[ logs ] creating and setting permissions on log directories"
-mkdir -p "$HOME/.logs/vim-undodir"
-
-if grep "sqlite-history" "$HOME/.profile" > /dev/null; then
-    echo "[ zsh ] sqlite3 already installed"
-else
-    echo "[ zsh ] installing sqlite3 hook"
-
-    git clone -q "https://github.com/larkery/zsh-histdb.git"
-
-    echo ". $SRC/zsh-histdb/sqlite-history.zsh" >> "$HOME/.profile"
-    echo ". $SRC/zsh-histdb/history-timer.zsh" >> "$HOME/.profile"
-    echo "autoload -Uz add-zsh-hook" >> "$HOME/.profile"
-    echo "add-zsh-hook preexec _start_timer" >> "$HOME/.profile"
-    echo "add-zsh-hook precmd  _stop_timer" >> "$HOME/.profile"
-    mkdir "$HOME/.histdb"
-    chmod 700 "$HOME/.histdb"
 fi
 
 popd > /dev/null

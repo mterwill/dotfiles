@@ -110,13 +110,6 @@ nmap <leader>ss :setlocal spell!<cr>
 " Fast edit vimrc
 nmap <leader>e :e ~/.vimrc<cr>
 
-" Persistent undo history
-try
-    set undodir=~/.logs/vim-undodir
-    set undofile
-catch
-endtry
-
 " Goyo (distraction free editing) shortcut
 nmap <silent> <leader>zz :Goyo<cr>
 
